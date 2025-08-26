@@ -1,0 +1,11 @@
+.form-popup{
+    display: none;
+    grid-column: 2/3;
+}
+.container{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.left-side{
+    grid-column: 1/2;
+}
