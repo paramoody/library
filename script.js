@@ -24,26 +24,48 @@ function addBookToLibrary(name, author, pages, read) {
 
 function printBook(book) {
   let div = document.createElement('div');
-  let btn = document.createElement('button');
+  let removeBtn = document.createElement('button');
   let readBtn = document.createElement('button');
-  div.dataset.id = book.id;
-  book.displayString = book.name + ', by ' + book.author + '. ' + book.pages + ' pages' + '. ' + book.read;
-  div.textContent = book.displayString;
-  btn.textContent = 'remove';
+  div.classList.add('book');
+  let nameDiv = document.createElement('div');
+  nameDiv.textContent = "Name: " + book.name;
+  div.appendChild(nameDiv);
+  let authorDiv = document.createElement('div');
+  authorDiv.textContent = "Author: " + book.author;
+  div.appendChild(authorDiv);
+  let pagesDiv = document.createElement('div');
+  pagesDiv.textContent = "Pages: " + book.pages;
+  div.appendChild(pagesDiv);
+  let readDiv = document.createElement('div');
+  readDiv.textContent = book.read;
+  div.appendChild(readDiv);
 
-  if(book.read == "read"){
-    readBtn.textContent = "Mark Unread"
-  }else{
-    readBtn.textContent = "Mark Read"
+//   div.dataset.id = book.id;
+//   book.displayString =
+//     book.name +
+//     ', by ' +
+//     book.author +
+//     '. ' +
+//     book.pages +
+//     ' pages' +
+//     '. ' +
+//     book.read;
+//   div.textContent = book.displayString;
+  removeBtn.textContent = 'remove';
+
+  if (book.read == 'read') {
+    readBtn.textContent = 'Mark Unread';
+  } else {
+    readBtn.textContent = 'Mark Read';
   }
 
-  btn.addEventListener('click', () => {
+  removeBtn.addEventListener('click', () => {
     removeDiv(div);
   });
-  readBtn.addEventListener("click", ()=> {
-    changeReadStatus(book, div);
-  })
-  div.appendChild(btn);
+  readBtn.addEventListener('click', () => {
+    changeReadStatus(book, readDiv, readBtn);
+  });
+  div.appendChild(removeBtn);
   div.appendChild(readBtn);
   bookContainer.appendChild(div);
 }
@@ -76,16 +98,20 @@ submitBtn.addEventListener('click', (e) => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 });
-
+addBookToLibrary("The Old Man and the Sea", "Ernest Hemingway", 500, "read");
+addBookToLibrary("Of Mice and Men", "John Steinbeck", 200, "read");
+addBookToLibrary("The Hitchhikers Guide to the Galaxy", "Douglas Adams", 300, "unread");
 console.log(myLibrary);
 
-function changeReadStatus(book, div){
-    if(book.read == "read"){
-        book.read = "unread";
-    }else{
-        book.read = "read";
-    }
-    //document.querySelector("div").textContent = book.displayString;
-    removeDiv(div);
-    printBook(book);
+function changeReadStatus(book, readDiv, readBtn) {
+  if (book.read == 'read') {
+    book.read = 'unread';
+    readBtn.textContent="Mark Read"
+  } else {
+    book.read = 'read';
+    readBtn.textContent='Mark Unread'
+  }
+  //document.querySelector("div").textContent = book.displayString;
+  readDiv.textContent=book.read;
+//   printBook(book);
 }
