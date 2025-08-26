@@ -9,3 +9,29 @@
 .left-side{
     grid-column: 1/2;
 }
+.book-container{
+    grid-column: 1/2;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.header{
+    display: flex;
+    padding: 20px;
+}
+.header button{
+
+    /* height: 70%; */
+    align-self: center;
+    padding: 10px;
+    margin: 20px;
+}
+.book{
+    border: 1px solid black;
+    margin: 10px;
+}
+.book div{
+    padding: 20px;
+    margin: 10px;
+    width: 10rem;
+}
