@@ -6,6 +6,7 @@ let formDiv = document.querySelector('.form-popup');
 let submitBtn = document.querySelector('.submit-btn');
 let form = document.querySelector('.form-container');
 
+//Book handled by constructor
 function Book(name, author, pages, read) {
   this.name = name;
   this.author = author;
