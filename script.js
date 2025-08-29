@@ -6,14 +6,28 @@ let formDiv = document.querySelector('.form-popup');
 let submitBtn = document.querySelector('.submit-btn');
 let form = document.querySelector('.form-container');
 
-function Book(name, author, pages, read) {
-  this.name = name;
-  this.author = author;
-  this.pages = pages;
-  this.id = crypto.randomUUID();
-  this.read = read;
-  this.displayString =
-    name + ', by ' + author + '. ' + pages + ' pages' + '. ' + read;
+// function Book(name, author, pages, read) {
+//   this.name = name;
+//   this.author = author;
+//   this.pages = pages;
+//   this.id = crypto.randomUUID();
+//   this.read = read;
+//   this.displayString =
+//     name + ', by ' + author + '. ' + pages + ' pages' + '. ' + read;
+// }
+
+class Book {
+  constructor(name, author, pages, id, read) {
+    this.name = name;
+    this.author = author;
+    this.pages = pages;
+    this.id = id;
+    this.read = read;
+  }
+  toggleRead() {
+    this.read = this.read === "read" ? "unread" : "read";
+    
+  }
 }
 
 function addBookToLibrary(name, author, pages, read) {
@@ -28,29 +42,19 @@ function printBook(book) {
   let readBtn = document.createElement('button');
   div.classList.add('book');
   let nameDiv = document.createElement('div');
-  nameDiv.textContent = "Name: " + book.name;
+  nameDiv.textContent = 'Name: ' + book.name;
   div.appendChild(nameDiv);
   let authorDiv = document.createElement('div');
-  authorDiv.textContent = "Author: " + book.author;
+  authorDiv.textContent = 'Author: ' + book.author;
   div.appendChild(authorDiv);
   let pagesDiv = document.createElement('div');
-  pagesDiv.textContent = "Pages: " + book.pages;
+  pagesDiv.textContent = 'Pages: ' + book.pages;
   div.appendChild(pagesDiv);
   let readDiv = document.createElement('div');
   readDiv.textContent = book.read;
   div.appendChild(readDiv);
 
-//   div.dataset.id = book.id;
-//   book.displayString =
-//     book.name +
-//     ', by ' +
-//     book.author +
-//     '. ' +
-//     book.pages +
-//     ' pages' +
-//     '. ' +
-//     book.read;
-//   div.textContent = book.displayString;
+
   removeBtn.textContent = 'remove';
 
   if (book.read == 'read') {
@@ -98,20 +102,19 @@ submitBtn.addEventListener('click', (e) => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 });
-addBookToLibrary("The Old Man and the Sea", "Ernest Hemingway", 500, "read");
-addBookToLibrary("Of Mice and Men", "John Steinbeck", 200, "read");
-addBookToLibrary("The Hitchhikers Guide to the Galaxy", "Douglas Adams", 300, "unread");
+addBookToLibrary('The Old Man and the Sea', 'Ernest Hemingway', 500, 'read');
+addBookToLibrary('Of Mice and Men', 'John Steinbeck', 200, 'read');
+addBookToLibrary(
+  'The Hitchhikers Guide to the Galaxy',
+  'Douglas Adams',
+  300,
+  'unread'
+);
 console.log(myLibrary);
 
 function changeReadStatus(book, readDiv, readBtn) {
-  if (book.read == 'read') {
-    book.read = 'unread';
-    readBtn.textContent="Mark Read"
-  } else {
-    book.read = 'read';
-    readBtn.textContent='Mark Unread'
-  }
-  //document.querySelector("div").textContent = book.displayString;
-  readDiv.textContent=book.read;
-//   printBook(book);
+  book.toggleRead();
+  readBtn.textContent = book.read === "read" ? "Mark Read" : "Mark Unread";
+  readDiv.textContent = book.read;
+  
 }
