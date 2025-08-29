@@ -6,15 +6,6 @@ let formDiv = document.querySelector('.form-popup');
 let submitBtn = document.querySelector('.submit-btn');
 let form = document.querySelector('.form-container');
 
-// function Book(name, author, pages, read) {
-//   this.name = name;
-//   this.author = author;
-//   this.pages = pages;
-//   this.id = crypto.randomUUID();
-//   this.read = read;
-//   this.displayString =
-//     name + ', by ' + author + '. ' + pages + ' pages' + '. ' + read;
-// }
 
 class Book {
   constructor(name, author, pages, id, read) {
